@@ -7,7 +7,7 @@ Authors: Joel Burton, Christian Fernandez, Meggie Mahnken.
 """
 
 
-from flask import Flask, render_template, redirect, flash, session
+from flask import Flask, render_template, redirect, flash, session, request
 import jinja2
 
 import model
@@ -60,7 +60,7 @@ def show_melon(id):
 def shopping_cart():
     """Display content of shopping cart."""
 
-    if session.keys() == []:
+    if "cart" not in session.keys():
         flash("Please add items to cart.")
         return redirect("/melons") 
     else:
@@ -112,9 +112,20 @@ def process_login():
     dictionary, look up the user, and store them in the session.
     """
 
-    # TODO: Need to implement this!
+    email = request.form.get("email")
+    password = request.form.get("password")
 
-    return "Oops! This needs to be implemented"
+    customer = model.Customer.get_by_email(email)
+
+    if customer == None:
+        flash("no such email")
+        return redirect("/login")
+    elif customer.password != password:
+        flash("incorrect password")
+        return redirect("/login")
+    else:
+        flash("Successful login!")
+        return redirect("/melons")
 
 
 @app.route("/checkout")
