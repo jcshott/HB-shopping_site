@@ -3,6 +3,7 @@
     <link rel="stylesheet"
           href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
     <link rel="stylesheet" href="/static/css/site.css"/>
+    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
@@ -24,12 +25,35 @@
                         My Melon Cart
                     </a>
                 </li>
-                <li><a href="/login">Log In</a></li>
+
+ 
+                  <li><a id="log" href="/login"> Log In </a></li>
+                  <li>TEST</li>
+
+
             </ul>
         </div>
 
     </div>
 </div>
+<script>
+
+function toggleLog(evt){
+    $.get("/logout", 
+      function(data) {
+      // evt.preventDefault()
+      if (data) {
+        $('#log').html("Log Out");
+      }else{
+        $('#log').html("Log In");
+      }
+    })  
+}
+
+$('#log').on('click', toggleLog)
+ 
+
+</script>
 
 <div class="container">
 

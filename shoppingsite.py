@@ -41,6 +41,8 @@ def list_melons():
     melons = model.Melon.get_all()
     return render_template("all_melons.html",
                            melon_list=melons)
+                           
+                            
 
 
 @app.route("/melon/<int:id>")
@@ -125,7 +127,15 @@ def process_login():
         return redirect("/login")
     else:
         flash("Successful login!")
+        session["logged_in_customer_email"] = True
         return redirect("/melons")
+
+@app.route("/logout")
+def process_logout():
+    if "logged_in_customer_email" in session:
+        return True
+    else:
+        return False
 
 
 @app.route("/checkout")
