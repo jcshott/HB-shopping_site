@@ -38,19 +38,18 @@
 </div>
 <script>
 
-function toggleLog(evt){
-    $.get("/logout", 
-      function(data) {
-      // evt.preventDefault()
-      if (data) {
-        $('#log').html("Log Out");
-      }else{
-        $('#log').html("Log In");
-      }
-    })  
-}
+// function toggleLog(evt){
+//     $.get("/logout", 
+//       function(data) {
+//       if (data) {
+//         $('#log').html("Log Out");
+//       }else{
+//         $('#log').html("Log In");
+//       }
+//     })  
+// }
 
-$('#log').on('click', toggleLog)
+// $('#log').on('click', toggleLog)
  
 
 </script>
